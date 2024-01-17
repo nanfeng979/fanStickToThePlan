@@ -1,13 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Demo2 : MonoBehaviour
+public class Demo3 : MonoBehaviour
 {
+    #region 地图相关
     public List<GameObject> mapBlocks;
     const int mapXCount = 10;
     const int mapZCount = 10;
-
     private int[] mapIndex = new int[mapXCount * mapZCount];
+    #endregion
+
+    #region 玩家相关
+    public GameObject player;
+    #endregion
 
     void Start()
     {
