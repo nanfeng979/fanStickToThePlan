@@ -93,11 +93,13 @@ namespace Y9g
             }
         }
 
-        internal static void GenerateVariousMap(int mapXCount, int mapZCount, List<GameObject> mapBlocks, int[] mapIndex, float mapGapDistance)
+        internal static GameObject GenerateVariousMap(int mapXCount, int mapZCount, List<GameObject> mapBlocks, int[] mapIndex, float mapGapDistance)
         {
             // 获取地图方块的宽度和高度。默认所有地图方块的宽度和高度相同。
             float mapBlockWidth = mapBlocks[0].transform.localScale.x; // 表示地图方块的宽度。
             float mapBlockHeight = mapBlocks[0].transform.localScale.z; // 表示地图方块的高度。
+
+            GameObject MapList = new GameObject("MapList");
 
             for (int i = 0; i < mapXCount; i++)
             {
@@ -109,21 +111,20 @@ namespace Y9g
 
                     Vector3 generatePosition = new Vector3(xPosition, 0, zPosition); // 根据 x 和 z 轴方向上的位置，计算出生成位置。
 
-                    GameObject MapList = new GameObject("MapList");
-
                     // 在计算出的位置生成地图方块。
                     Object.Instantiate(mapBlocks[mapIndex[i * mapZCount + j]], generatePosition, Quaternion.identity, MapList.transform);
                 }
             }
+
+            return MapList;
         }
 
-        internal static void GenerateVariousMap(int mapXCount, int mapZCount, List<GameObject> mapBlocks, int[] mapIndex, float mapGapDistance, bool isCenter, bool? isSave = null)
+        internal static GameObject GenerateVariousMap(int mapXCount, int mapZCount, List<GameObject> mapBlocks, int[] mapIndex, float mapGapDistance, bool isCenter, bool? isSave = null)
         {
             // 如果不是以中心点为原点，则调用另一个重载方法。
             if (!isCenter)
             {
-                GenerateVariousMap(mapXCount, mapZCount, mapBlocks, mapIndex, mapGapDistance);
-                return;
+                return GenerateVariousMap(mapXCount, mapZCount, mapBlocks, mapIndex, mapGapDistance);
             }
 
             // 地图方块的宽度和高度。
@@ -147,9 +148,10 @@ namespace Y9g
 
             GameObject MapList = new GameObject("MapList");
 
-            for (int i = -mapXCount / 2, ii = 0; i < mapXCount / 2; i++, ii++)
+            int index = 0;
+            for (int i = -mapXCount / 2; i < mapXCount / 2; i++)
             {
-                for (int j = -mapZCount / 2, jj = 0; j < mapZCount / 2; j++, jj++)
+                for (int j = -mapZCount / 2; j < mapZCount / 2; j++)
                 {
                     // 计算每个方块在 x 或 z 轴方向上的位置，基于方块尺寸和间隔距离的乘积和偏移量。
                     float xPosition = i * (mapBlockWidth + mapGapDistance) + xPositionOffset; // x 轴方向上的位置。
@@ -158,7 +160,8 @@ namespace Y9g
                     Vector3 generatePosition = new Vector3(xPosition, 0, zPosition); // 根据 x 和 z 轴方向上的位置，计算出生成位置。
                     
                     // 在计算出的位置生成地图方块。
-                    Object.Instantiate(mapBlocks[mapIndex[ii * mapZCount + jj]], generatePosition, Quaternion.identity, MapList.transform);
+                    Object.Instantiate(mapBlocks[mapIndex[index++]], generatePosition, Quaternion.identity, MapList.transform);
+                    Debug.Log("index: " + index + ", mapIndex[index]: " + mapIndex[index - 1]);
                 }
             }
 
@@ -167,6 +170,8 @@ namespace Y9g
                 UnityEditor.SaveToAssets(MapList, null);
                 Debug.Log("Save MapList to Assets.");
             }
+
+            return MapList;
         }
     }
 }
