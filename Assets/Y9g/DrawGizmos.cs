@@ -41,5 +41,16 @@ namespace Y9g
         {
             DrawLine(origin, direction, 1.0f, Color.red);
         }
+
+        /// <summary>
+        /// 绘制XYZ轴。
+        /// </summary>
+        /// <param name="length">轴的长度。</param>
+        internal void DrawLineXYZ(float length)
+        {
+            DrawLine(Vector3.zero, Vector3.up, length, Color.red);
+            DrawLine(Vector3.zero, Vector3.right, length, Color.green);
+            DrawLine(Vector3.zero, Vector3.forward, length, Color.blue);
+        }
     }
 }

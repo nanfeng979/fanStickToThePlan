@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Y9g
@@ -86,6 +87,11 @@ namespace Y9g
                     Object.Instantiate(mapBlock, generatePosition, Quaternion.identity);
                 }
             }
+        }
+
+        internal static void GenerateVariousMap(int mapXCount, int mapZCount, List<GameObject> mapBlock, int[] mapIndex, float mapGapDistance, bool isCenter)
+        {
+            
         }
     }
 }
