@@ -18,14 +18,12 @@ public class Demo4 : MonoBehaviour
     {
         mapIndex = new int[]
         {
-            2, 2, 0, 0, 0, 0, 
-            0, 2, 2, 0, 0, 0, 
-            0, 0, 2, 2, 0, 0, 
-            0, 0, 0, 2, 2, 0,
-            0, 0, 0, 0, 2, 0, 
-            0, 0, 0, 0, 2, 0, 
-            0, 0, 0, 0, 2, 2, 
-            0, 0, 0, 0, 0, 2,
+            0, 1, 1, 0, 0, 0, 2, 2, 
+            0, 0, 0, 2, 2, 2, 2, 0, 
+            0, 0, 2, 2, 0, 0, 0, 0, 
+            0, 2, 2, 0, 0, 0, 0, 0, 
+            2, 2, 0, 0, 0, 0, 0, 0, 
+            2, 0, 0, 0, 0, 0, 0, 0, 
         };
 
         GameObject mapList =  Y9g.MapGenerate.GenerateVariousMap(mapXCount, mapZCount, mapBlocks, mapIndex, 0.5f, true);
