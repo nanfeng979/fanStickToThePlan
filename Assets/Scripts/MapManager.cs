@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Y9g;
 
-public class MapManager : MonoBehaviour
+public class MapManager : Singleton<MapManager>
 {
     void Start()
     {
