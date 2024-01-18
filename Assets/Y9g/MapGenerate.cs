@@ -21,15 +21,15 @@ namespace Y9g
             float mapBlockWidth = mapBlock.transform.localScale.x; // 表示地图方块的宽度。
             float mapBlockHeight = mapBlock.transform.localScale.z; // 表示地图方块的高度。
 
-            for (int i = 0; i < mapXCount; i++)
+            for (int i = 0; i < mapZCount; i++)
             {
-                for (int j = 0; j < mapZCount; j++)
+                for (int j = 0; j < mapXCount; j++)
                 {
                     // 计算每个方块在 x 或 z 轴方向上的位置，基于方块尺寸和间隔距离的乘积。
-                    float xPosition = i * (mapBlockWidth + mapGapDistance); // x 轴方向上的位置。
-                    float zPosition = j * (mapBlockHeight + mapGapDistance); // z 轴方向上的位置。
+                    float xPosition = j * (mapBlockWidth + mapGapDistance); // x 轴方向上的位置。
+                    float zPosition = i * (mapBlockHeight + mapGapDistance); // z 轴方向上的位置。
 
-                    Vector3 generatePosition = new Vector3(xPosition, 0, zPosition); // 根据 x 和 z 轴方向上的位置，计算出生成位置。
+                    Vector3 generatePosition = new Vector3(xPosition, 0, -zPosition); // 根据 x 和 z 轴方向上的位置，计算出生成位置。
 
                     GameObject MapList = new GameObject("MapList");
 
@@ -77,15 +77,15 @@ namespace Y9g
 
             GameObject MapList = new GameObject("MapList");
 
-            for (int i = -mapXCount / 2; i < mapXCount / 2; i++)
+            for (int i = -mapZCount / 2; i < mapZCount / 2; i++)
             {
-                for (int j = -mapZCount / 2; j < mapZCount / 2; j++)
+                for (int j = -mapXCount / 2; j < mapXCount / 2; j++)
                 {
                     // 计算每个方块在 x 或 z 轴方向上的位置，基于方块尺寸和间隔距离的乘积和偏移量。
-                    float xPosition = i * (mapBlockWidth + mapGapDistance) + xPositionOffset; // x 轴方向上的位置。
-                    float zPosition = j * (mapBlockHeight + mapGapDistance) + zPositionOffset; // z 轴方向上的位置。
+                    float xPosition = j * (mapBlockWidth + mapGapDistance) + xPositionOffset; // x 轴方向上的位置。
+                    float zPosition = i * (mapBlockHeight + mapGapDistance) + zPositionOffset; // z 轴方向上的位置。
 
-                    Vector3 generatePosition = new Vector3(xPosition, 0, zPosition); // 根据 x 和 z 轴方向上的位置，计算出生成位置。
+                    Vector3 generatePosition = new Vector3(xPosition, 0, -zPosition); // 根据 x 和 z 轴方向上的位置，计算出生成位置。
                     
                     // 在计算出的位置生成地图方块。
                     Object.Instantiate(mapBlock, generatePosition, Quaternion.identity, MapList.transform);
@@ -120,7 +120,7 @@ namespace Y9g
             return MapList;
         }
 
-        internal static GameObject GenerateVariousMap(int mapXCount, int mapZCount, List<GameObject> mapBlocks, int[] mapIndex, float mapGapDistance, bool isCenter, bool? isSave = null)
+        internal static GameObject GenerateVariousMap(int mapXCount, int mapZCount, List<GameObject> mapBlocks, int[] mapIndex, float mapGapDistance, bool isCenter, string tools = null)
         {
             // 如果不是以中心点为原点，则调用另一个重载方法。
             if (!isCenter)
@@ -165,7 +165,7 @@ namespace Y9g
                 }
             }
 
-            if (isSave == true)
+            if (tools == "Save")
             {
                 UnityEditor.SaveToAssets(MapList, null);
                 Debug.Log("Save MapList to Assets.");

@@ -4,6 +4,39 @@ namespace Y9g
 {
     public sealed class SystemIO
     {
+        #region Json
+        public static string ReadJsonFromStreamingAssets(string fileName)
+        {
+            string result = string.Empty;
+            result = ReadFileFromStreamingAssets(fileName + ".json");
+
+            return result;
+        }
+
+        public static T ReadJsonFromStreamingAssets<T>(string fileName)
+        {
+            T result = default(T);
+            string json = ReadFileFromStreamingAssets(fileName + ".json");
+            if (!string.IsNullOrEmpty(json))
+            {
+                result = ReadJson<T>(json);
+            }
+
+            return result;
+        }
+
+        public static T ReadJsonFromStreamingAssetsWithSystemSelf<T>(string fileName)
+        {
+            T result = default(T);
+            string json = ReadFileFromStreamingAssets(fileName + ".json");
+            if (!string.IsNullOrEmpty(json))
+            {
+                result = ReadJsonWithSystemSelf<T>(json);
+            }
+
+            return result;
+        }
+
         public static string ReadFileFromStreamingAssets(string fileName)
         {
             string result = string.Empty;
@@ -20,24 +53,16 @@ namespace Y9g
             return result;
         }
 
-        public static T ReadJsonFileFromStreamingAssets<T>(string fileName)
+        public static T ReadJson<T>(string jsonString)
         {
-            T result = default(T);
-            string json = ReadFileFromStreamingAssets(fileName + ".json");
-            if (!string.IsNullOrEmpty(json))
-            {
-                result = ReadJson<T>(json);
-            }
-
-            return result;
+            T jsonData = JsonUtility.FromJson<T>(jsonString);
+            return jsonData;
         }
 
-        public static string ReadJsonFileFromStreamingAssets(string fileName)
+        public static T ReadJsonWithSystemSelf<T>(string jsonString)
         {
-            string result = string.Empty;
-            result = ReadFileFromStreamingAssets(fileName + ".json");
-
-            return result;
+            JsonData<T> jsonData = JsonUtility.FromJson<JsonData<T>>(jsonString);
+            return jsonData.data;
         }
 
         [System.Serializable]
@@ -45,11 +70,6 @@ namespace Y9g
         {
             public T data;
         }
-
-        public static T ReadJson<T>(string jsonString)
-        {
-            JsonData<T> jsonData = JsonUtility.FromJson<JsonData<T>>(jsonString);
-            return jsonData.data;
-        }
+        #endregion Json
     }
 }
