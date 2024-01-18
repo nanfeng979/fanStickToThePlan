@@ -16,14 +16,14 @@ public class Demo4 : MonoBehaviour
 
     void Start()
     {
-        mapIndex = Y9g.SystemIO.ReadJsonFileFromStreamingAssets<int[]>("Demo4");
+        mapIndex = Y9g.SystemIO.ReadJsonFromStreamingAssetsWithSystemSelf<int[]>("Demo4");
 
-        MapManager.Instance.mapIndex = mapIndex;
-        MapManager.Instance.mapXCount = mapXCount;
-        MapManager.Instance.mapZCount = mapZCount;
+        MapManager.Instance.MapIndex = mapIndex;
+        MapManager.Instance.MapXCount = mapXCount;
+        MapManager.Instance.MapZCount = mapZCount;
 
         GameObject mapList =  Y9g.MapGenerate.GenerateVariousMap(mapXCount, mapZCount, mapBlocks, mapIndex, 0.2f, true);
-        MapManager.Instance.mapList = mapList;
+        MapManager.Instance.MapList = mapList;
 
         // 创建玩家。
         GameObject player = Instantiate(playerPrefab, mapList.transform.GetChild(0).position, Quaternion.identity);

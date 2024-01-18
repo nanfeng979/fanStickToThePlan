@@ -5,15 +5,66 @@ using Y9g;
 public class MapManager : Singleton<MapManager>
 {
     #region 地图相关
-    [HideInInspector]
-    public int mapXCount;
-    [HideInInspector]
-    public int mapZCount;
-    [HideInInspector]
-    public int[] mapIndex;
-    [HideInInspector]
-    public GameObject mapList;
-    private HashSet<int> Obstacles = new HashSet<int>() { 1, 2 };
+    private int mapXCount;
+    public int MapXCount
+    {
+        get
+        {
+            return mapXCount;
+        }
+        set
+        {
+            mapXCount = value;
+        }
+    }
+    private int mapZCount;
+    public int MapZCount
+    {
+        get
+        {
+            return mapZCount;
+        }
+        set
+        {
+            mapZCount = value;
+        }
+    }
+    private int[] mapIndex;
+    public int[] MapIndex
+    {
+        get
+        {
+            return mapIndex;
+        }
+        set
+        {
+            mapIndex = value;
+        }
+    }
+    private GameObject mapList;
+    public GameObject MapList
+    {
+        get
+        {
+            return mapList;
+        }
+        set
+        {
+            mapList = value;
+        }
+    }
+    private List<int> obstacles = new List<int>();
+    public List<int> Obstacles
+    {
+        get
+        {
+            return obstacles;
+        }
+        set
+        {
+            obstacles = value;
+        }
+    }
     #endregion 地图相关
     
     [HideInInspector]
@@ -37,6 +88,15 @@ public class MapManager : Singleton<MapManager>
     internal Vector3 GetPlayerPosition()
     {
         return mapList.transform.GetChild(playerIndex).position + new Vector3(0, 1.5f, 0);
+    }
+
+    internal void SetBaseInfo(int mapXCount, int mapZCount, int[] mapIndex, GameObject mapList, List<int> obstacles = null)
+    {
+        this.mapXCount = mapXCount;
+        this.mapZCount = mapZCount;
+        this.mapIndex = mapIndex;
+        this.mapList = mapList;
+        this.obstacles = obstacles;
     }
 
     internal bool IsCanMove(Move4Direction moveDirection)

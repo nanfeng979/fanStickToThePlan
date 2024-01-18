@@ -40,10 +40,10 @@ public class PlayerController : MonoBehaviour
         switch (moveDirection)
         {
             case Move4Direction.Up:
-                MapManager.Instance.AddPlayerIndex(-MapManager.Instance.mapXCount);
+                MapManager.Instance.AddPlayerIndex(-MapManager.Instance.MapXCount);
                 break;
             case Move4Direction.Down:
-                MapManager.Instance.AddPlayerIndex(MapManager.Instance.mapXCount);
+                MapManager.Instance.AddPlayerIndex(MapManager.Instance.MapXCount);
                 break;
             case Move4Direction.Left:
                 MapManager.Instance.AddPlayerIndex(-1);
