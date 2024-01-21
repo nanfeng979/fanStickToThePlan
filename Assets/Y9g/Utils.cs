@@ -2,6 +2,23 @@ using UnityEngine;
 
 namespace Y9g
 {
+    public sealed class Utils
+    {
+        public static Color HexToColor(string hex)
+        {
+            Color color = Color.white;
+            if (ColorUtility.TryParseHtmlString(hex, out color))
+            {
+                return color;
+            }
+            else
+            {
+                Debug.LogError("HexToColor: " + hex);
+                return Color.white;
+            }
+        }
+    }
+
     public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
         public static T Instance { get; private set; }
