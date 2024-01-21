@@ -159,6 +159,11 @@ public class MapManager : Singleton<MapManager>
         return true;
     }
 
+    internal bool IsObstacle(int index)
+    {
+        return obstacles.Contains(mapIndex[index]);
+    }
+
     internal void PrintPlayerCurrentIndex()
     {
         Debug.Log("当前玩家所在的位置是：" + playerIndex);

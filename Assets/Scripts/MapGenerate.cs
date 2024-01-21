@@ -5,11 +5,14 @@ using UnityEngine;
 public abstract class MapGenerate : MonoBehaviour
 {
     #region 地图相关
-    public List<GameObject> mapBlocks;
+    [SerializeField]
+    private List<GameObject> mapBlocks;
     private int mapXCount;
     private int mapZCount;
     private int[] mapIndex;
     public string mapFileName;
+    [SerializeField]
+    private List<GameObject> obstacles;
     #endregion
 
     #region 玩家相关
@@ -32,6 +35,21 @@ public abstract class MapGenerate : MonoBehaviour
 
         // 绑定地图。
         MapManager.Instance.SetBaseInfo(mapXCount, mapZCount, mapIndex, mapList, mapGenerateData.obstacles);
+
+        // 创建障碍物。
+        // 遍历maplist
+        for (int i = 0; i < mapList.transform.childCount; i++)
+        {
+            // 如果是障碍物。
+            if (MapManager.Instance.IsObstacle(i))
+            {
+                // 创建障碍物。
+                GameObject obstacle = Instantiate(obstacles[mapIndex[i]], mapList.transform.GetChild(i).position, Quaternion.identity, mapList.transform.GetChild(i));
+                obstacle.transform.position = Y9g.UsualCalculate.Vector3ChangeY(obstacle.transform.position, 0.5f);
+            }
+        }
+
+        // 调整障碍物位置。
 
         // 创建玩家。
         GameObject player = Instantiate(playerPrefab, mapList.transform.GetChild(0).position, Quaternion.identity);

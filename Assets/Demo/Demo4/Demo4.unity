@@ -132,7 +132,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 363923717}
-  - component: {fileID: 363923716}
   - component: {fileID: 363923718}
   m_Layer: 0
   m_Name: Map
@@ -141,23 +140,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &363923716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 363923715}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23876234eccd8814ea22cc6170672c88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mapBlocks:
-  - {fileID: 3489112939161156116, guid: a9a6f3df15524cc47b060cf90413b0b8, type: 3}
-  - {fileID: 8946964815514635954, guid: 493141ffe69a821449ec3e6d31e58051, type: 3}
-  - {fileID: 7015502312705387758, guid: 0ca46306d68bf0d4f9fbdadb88909668, type: 3}
-  playerPrefab: {fileID: 8675556131152965167, guid: df66efd41830ba740aed6d111e6b1a0a, type: 3}
 --- !u!4 &363923717
 Transform:
   m_ObjectHideFlags: 0
@@ -188,7 +170,11 @@ MonoBehaviour:
   - {fileID: 3489112939161156116, guid: a9a6f3df15524cc47b060cf90413b0b8, type: 3}
   - {fileID: 8946964815514635954, guid: 493141ffe69a821449ec3e6d31e58051, type: 3}
   - {fileID: 7015502312705387758, guid: 0ca46306d68bf0d4f9fbdadb88909668, type: 3}
-  mapIndexFileName: Demo4_2
+  mapFileName: Demo4_2
+  obstacles:
+  - {fileID: 0}
+  - {fileID: 8944483740410803946, guid: 7cf6100b8921bc5438bbdca3525b7e1d, type: 3}
+  - {fileID: 4127385078837883627, guid: bbae421597d7e1a4da6d0221227da9a1, type: 3}
   playerPrefab: {fileID: 8675556131152965167, guid: df66efd41830ba740aed6d111e6b1a0a, type: 3}
 --- !u!1 &667040811
 GameObject:
