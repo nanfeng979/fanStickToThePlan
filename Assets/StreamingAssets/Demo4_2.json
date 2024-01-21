@@ -9,5 +9,9 @@
         2, 2, 0, 0, 0, 0, 0, 0, 
         2, 0, 0, 0, 0, 0, 0, 0
     ],
-    "obstacles" : [ 1, 2]
+    "mapBlocks" : [ "MapBlock1", "MapBlock2", "MapBlock3" ],
+    "obstaclesInfo" : [ 
+        { "index": 1, "yOffSet": 1 },
+        { "index": 2, "yOffSet": 2 }
+     ]
 }
