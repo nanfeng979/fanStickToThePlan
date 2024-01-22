@@ -1,4 +1,4 @@
-public class SetButtonUI : ButtonGenerate, IEscClick
+public class SetButtonUI : ButtonGenerate, Y9g.IEscClick
 {
     protected override void Start()
     {

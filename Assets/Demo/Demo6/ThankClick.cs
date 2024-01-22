@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ThankClick : MonoBehaviour, IButtonClick
+public class ThankClick : MonoBehaviour, Y9g.IButtonClick
 {
     public void OnButtonClick()
     {
