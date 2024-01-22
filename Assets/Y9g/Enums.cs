@@ -1,6 +1,6 @@
 namespace Y9g
 {
-    internal enum Move4Direction
+    public enum Move4Direction
     {
         None,
         Up,
@@ -9,7 +9,7 @@ namespace Y9g
         Right,
     }
 
-    internal enum Move8Direction
+    public enum Move8Direction
     {
         None,
         Up,
