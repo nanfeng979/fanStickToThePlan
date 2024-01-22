@@ -74,6 +74,7 @@ public class Demo5 : MonoBehaviour
     {
         ChangeUIIndex(index);
         ChangeUIColor(index);
+        PlaySound(0);
     }
 
     // 改变UI索引。
@@ -93,6 +94,12 @@ public class Demo5 : MonoBehaviour
         // 改变当前UI颜色。
         GameObject currentUI = UIMapping[index];
         currentUI.transform.GetComponent<UnityEngine.UI.Button>().image.color = Y9g.Utils.HexToColor("#" + buttonColor);
+    }
+
+    // 播放音效。
+    private void PlaySound(int index)
+    {
+        SoundManager.Instance.PlaySound(index);
     }
 
     // 获取下一个UI索引。
