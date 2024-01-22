@@ -1,4 +1,4 @@
-public class ShouyeButtonUI : ButtonGenerate
+public class ShouyeButtonUI : ButtonGenerate, IEscClick
 {
     protected override void Start()
     {
@@ -12,5 +12,10 @@ public class ShouyeButtonUI : ButtonGenerate
         };
 
         base.Start();
+    }
+
+    public void OnEscClick()
+    {
+        gameObject.SetActive(false);
     }
 }

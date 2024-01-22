@@ -34,11 +34,6 @@ public class ButtonGenerate : MonoBehaviour
 
         // 初始化UI颜色。
         ChangeUIColor(currentUIIndex);
-
-        if (ButtonInputManager.Instance != null)
-        {
-            ButtonInputManager.Instance.AddButtonGenerate(this);
-        }
     }
 
     // 选择UI。
@@ -179,10 +174,17 @@ public class ButtonGenerate : MonoBehaviour
         }
     }
 
-    private void OnDisable() {
-        if (ButtonInputManager.Instance != null)
+    private void OnEnable() {
+        if (InputManager.Instance != null)
         {
-            ButtonInputManager.Instance.DeleteButtonGenerate(this);
+            InputManager.Instance.AddButtonGenerate(this);
+        }
+    }
+
+    private void OnDisable() {
+        if (InputManager.Instance != null)
+        {
+            InputManager.Instance.DeleteButtonGenerate(this);
         }
     }
 }

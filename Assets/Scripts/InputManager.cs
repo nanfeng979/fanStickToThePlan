@@ -2,10 +2,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Y9g;
 
-public class ButtonInputManager : Singleton<ButtonInputManager>
+public class InputManager : Singleton<InputManager>
 {
     public List<ButtonGenerate> buttonGenerates = new List<ButtonGenerate>();
     private ButtonGenerate currentButtonGenerate;
+
+    [SerializeField]
+    private GameObject shouye;
+
+    void Start()
+    {
+        shouye.SetActive(true);
+    }
 
     void Update()
     {
@@ -34,6 +42,16 @@ public class ButtonInputManager : Singleton<ButtonInputManager>
             if (currentButtonClick != null)
             {
                 currentButtonClick.OnButtonClick();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            // 获取当前页面对象。
+            IEscClick currentRedyToEscObject = currentButtonGenerate.GetComponent<IEscClick>();
+            if (currentRedyToEscObject != null)
+            {
+                currentRedyToEscObject.OnEscClick();
             }
         }
     }
