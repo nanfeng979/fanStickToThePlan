@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ButtonClick : MonoBehaviour, IButtonClick
+public class SetClick : MonoBehaviour, IButtonClick
 {
     public GameObject nextUIList;
 
