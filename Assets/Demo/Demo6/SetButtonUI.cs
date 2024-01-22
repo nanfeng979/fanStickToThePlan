@@ -1,4 +1,4 @@
-public class Demo5 : ButtonGenerate
+public class SetButtonUI : ButtonGenerate
 {
     protected override void Start()
     {
@@ -22,10 +22,5 @@ public class Demo5 : ButtonGenerate
         };
 
         base.Start();
-    }
-
-    protected override void Update()
-    {
-        base.Update();
     }
 }

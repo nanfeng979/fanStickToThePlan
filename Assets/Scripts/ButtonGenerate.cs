@@ -17,6 +17,10 @@ public class ButtonGenerate : MonoBehaviour
     protected const int Down = (int)Move4Direction.Down;
     protected const int Left = (int)Move4Direction.Left;
     protected const int Right = (int)Move4Direction.Right;
+    protected const int UpLeft = (int)Move8Direction.UpLeft;
+    protected const int UpRight = (int)Move8Direction.UpRight;
+    protected const int DownLeft = (int)Move8Direction.DownLeft;
+    protected const int DownRight = (int)Move8Direction.DownRight;
 
     protected int[][] UIGraph;
 
@@ -30,25 +34,10 @@ public class ButtonGenerate : MonoBehaviour
 
         // 初始化UI颜色。
         ChangeUIColor(currentUIIndex);
-    }
 
-    protected virtual void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (ButtonInputManager.Instance != null)
         {
-            MoveInput(Move4Direction.Up);
-        }
-        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            MoveInput(Move4Direction.Down);
-        }
-        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            MoveInput(Move4Direction.Left);
-        }
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            MoveInput(Move4Direction.Right);
+            ButtonInputManager.Instance.AddButtonGenerate(this);
         }
     }
 
@@ -103,8 +92,14 @@ public class ButtonGenerate : MonoBehaviour
         return currentUIIndex;
     }
 
+    // 获取当前UI索引的UI游戏对象。
+    public GameObject GetUIGameobject()
+    {
+        return UIMapping[GetUIIndex()];
+    }
+
     // 移动输入。
-    protected void MoveInput(Move4Direction moveDirection)
+    public void MoveInput(Move4Direction moveDirection)
     {
         int direction = (int)moveDirection; // 得到移动方向的整数值。
         // 如果当前UI映射包含移动方向。
@@ -115,6 +110,79 @@ public class ButtonGenerate : MonoBehaviour
             {
                 ChoseUI(nextIndex); // 根据下一个UI索引选择UI。
             }
+        }
+        else
+        {
+            switch (moveDirection)
+            {
+                case Move4Direction.Up:
+                    if (Array.IndexOf(GetCurrentUIMapping(), UpLeft) != -1 || Array.IndexOf(GetCurrentUIMapping(), UpRight) != -1)
+                    {
+                        int nextIndex;
+                        if (Array.IndexOf(GetCurrentUIMapping(), UpLeft) != -1)
+                        {
+                            nextIndex = Array.IndexOf(GetCurrentUIMapping(), UpLeft);
+                        }
+                        else
+                        {
+                            nextIndex = Array.IndexOf(GetCurrentUIMapping(), UpRight);
+                        }
+                        ChoseUI(nextIndex);
+                    }
+                    break;
+                case Move4Direction.Down:
+                    if (Array.IndexOf(GetCurrentUIMapping(), DownLeft) != -1 || Array.IndexOf(GetCurrentUIMapping(), DownRight) != -1)
+                    {
+                        int nextIndex;
+                        if (Array.IndexOf(GetCurrentUIMapping(), DownLeft) != -1)
+                        {
+                            nextIndex = Array.IndexOf(GetCurrentUIMapping(), DownLeft);
+                        }
+                        else
+                        {
+                            nextIndex = Array.IndexOf(GetCurrentUIMapping(), DownRight);
+                        }
+                        ChoseUI(nextIndex);
+                    }
+                    break;
+                case Move4Direction.Left:
+                    if (Array.IndexOf(GetCurrentUIMapping(), UpLeft) != -1 || Array.IndexOf(GetCurrentUIMapping(), DownLeft) != -1)
+                    {
+                        int nextIndex;
+                        if (Array.IndexOf(GetCurrentUIMapping(), UpLeft) != -1)
+                        {
+                            nextIndex = Array.IndexOf(GetCurrentUIMapping(), UpLeft);
+                        }
+                        else
+                        {
+                            nextIndex = Array.IndexOf(GetCurrentUIMapping(), DownLeft);
+                        }
+                        ChoseUI(nextIndex);
+                    }
+                    break;
+                case Move4Direction.Right:
+                    if (Array.IndexOf(GetCurrentUIMapping(), UpRight) != -1 || Array.IndexOf(GetCurrentUIMapping(), DownRight) != -1)
+                    {
+                        int nextIndex;
+                        if (Array.IndexOf(GetCurrentUIMapping(), UpRight) != -1)
+                        {
+                            nextIndex = Array.IndexOf(GetCurrentUIMapping(), UpRight);
+                        }
+                        else
+                        {
+                            nextIndex = Array.IndexOf(GetCurrentUIMapping(), DownRight);
+                        }
+                        ChoseUI(nextIndex);
+                    }
+                    break;
+            }
+        }
+    }
+
+    private void OnDisable() {
+        if (ButtonInputManager.Instance != null)
+        {
+            ButtonInputManager.Instance.DeleteButtonGenerate(this);
         }
     }
 }
