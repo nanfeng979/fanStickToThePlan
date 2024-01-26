@@ -43,7 +43,6 @@ public class ButtonGenerate : Page, IMove
     protected void ChoseUI(int index)
     {
         ChangeUIIndex(index);
-        ChangeUIColor(index);
         PlaySound(0);
     }
 
@@ -52,6 +51,7 @@ public class ButtonGenerate : Page, IMove
     {
         previousUIIndex = currentUIIndex; // 改变上一个UI索引。
         currentUIIndex = index; // 改变当前UI索引。
+        ChangeUIColor(index);
     }
 
     // 改变UI颜色。
@@ -100,6 +100,12 @@ public class ButtonGenerate : Page, IMove
     public override GameObject GetCurrentObject()
     {
         return UIMapping[GetUIIndex()];
+    }
+
+    // 重新打开页面。
+    protected void Init()
+    {
+        ChangeUIIndex(0);
     }
 
     // 移动输入。
@@ -194,6 +200,7 @@ public class ButtonGenerate : Page, IMove
         if (InputManager.Instance != null)
         {
             InputManager.Instance.DeleteLastPage(this);
+            Init();
         }
     }
 }
