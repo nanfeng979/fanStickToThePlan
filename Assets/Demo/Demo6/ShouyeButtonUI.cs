@@ -14,8 +14,9 @@ public class ShouyeButtonUI : ButtonGenerate, Y9g.IEscClick
         base.Start();
     }
 
-    public void OnEscClick()
+    public void OnEsc()
     {
-        gameObject.SetActive(false);
+        // gameObject.SetActive(false);
+        UnityEngine.Debug.Log("ShouyeButtonUI OnEsc");
     }
 }

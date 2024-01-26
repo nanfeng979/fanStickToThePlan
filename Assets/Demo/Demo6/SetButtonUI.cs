@@ -24,7 +24,7 @@ public class SetButtonUI : ButtonGenerate, Y9g.IEscClick
         base.Start();
     }
 
-    public void OnEscClick()
+    public void OnEsc()
     {
         gameObject.SetActive(false);
     }

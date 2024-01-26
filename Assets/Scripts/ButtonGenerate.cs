@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Y9g;
 
-public class ButtonGenerate : MonoBehaviour
+public class ButtonGenerate : Page, IMove
 {
     [SerializeField]
     protected GameObject UIGameobjectList;
-    protected Dictionary<int, GameObject> UIMapping = new Dictionary<int, GameObject>();
+    // protected Dictionary<int, GameObject> UIMapping = new Dictionary<int, GameObject>();
+    protected List<GameObject> UIMapping = new List<GameObject>();
     protected int previousUIIndex = 0;
     protected int currentUIIndex = 0;
 
     public string buttonColor;
 
+    # region UI const
     protected const int Up = (int)Move4Direction.Up;
     protected const int Down = (int)Move4Direction.Down;
     protected const int Left = (int)Move4Direction.Left;
@@ -21,6 +23,7 @@ public class ButtonGenerate : MonoBehaviour
     protected const int UpRight = (int)Move8Direction.UpRight;
     protected const int DownLeft = (int)Move8Direction.DownLeft;
     protected const int DownRight = (int)Move8Direction.DownRight;
+    #endregion UI const
 
     protected int[][] UIGraph;
 
@@ -29,7 +32,7 @@ public class ButtonGenerate : MonoBehaviour
         // 初始化UI映射。
         for (int i = 0; i < UIGameobjectList.transform.childCount; i++)
         {
-            UIMapping.Add(i, UIGameobjectList.transform.GetChild(i).gameObject);
+            UIMapping.Add(UIGameobjectList.transform.GetChild(i).gameObject);
         }
 
         // 初始化UI颜色。
@@ -93,8 +96,14 @@ public class ButtonGenerate : MonoBehaviour
         return UIMapping[GetUIIndex()];
     }
 
+    // 重写获取当前对象
+    public override GameObject GetCurrentObject()
+    {
+        return UIMapping[GetUIIndex()];
+    }
+
     // 移动输入。
-    public void MoveInput(Move4Direction moveDirection)
+    public override void OnMove(Move4Direction moveDirection)
     {
         int direction = (int)moveDirection; // 得到移动方向的整数值。
         // 如果当前UI映射包含移动方向。
@@ -177,14 +186,14 @@ public class ButtonGenerate : MonoBehaviour
     private void OnEnable() {
         if (InputManager.Instance != null)
         {
-            InputManager.Instance.AddButtonGenerate(this);
+            InputManager.Instance.AddNewPage(this);
         }
     }
 
     private void OnDisable() {
         if (InputManager.Instance != null)
         {
-            InputManager.Instance.DeleteButtonGenerate(this);
+            InputManager.Instance.DeleteLastPage(this);
         }
     }
 }

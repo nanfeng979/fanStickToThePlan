@@ -7,6 +7,11 @@ namespace Y9g
 
     public interface IEscClick
     {
-        void OnEscClick();
+        void OnEsc();
+    }
+
+    public interface IMove
+    {
+        void OnMove(Move4Direction direction);
     }
 }
