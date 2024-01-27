@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Y9g;
 
-public class ButtonGenerate : Page
+public class ButtonGenerate : Page, IEscClick
 {
     [SerializeField]
     protected GameObject UIGameobjectList;
@@ -12,7 +12,7 @@ public class ButtonGenerate : Page
     protected int previousUIIndex = 0;
     protected int currentUIIndex = 0;
 
-    public string buttonColor;
+    public string buttonColor = "DB5454";
 
     # region UI const
     protected const int Up = (int)Move4Direction.Up;
@@ -187,5 +187,10 @@ public class ButtonGenerate : Page
                     break;
             }
         }
+    }
+
+    public virtual void OnEsc()
+    {
+        gameObject.SetActive(false);
     }
 }

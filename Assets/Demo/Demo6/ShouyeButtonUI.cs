@@ -1,4 +1,4 @@
-public class ShouyeButtonUI : ButtonGenerate, Y9g.IEscClick
+public class ShouyeButtonUI : ButtonGenerate
 {
     protected override void Start()
     {
@@ -14,7 +14,7 @@ public class ShouyeButtonUI : ButtonGenerate, Y9g.IEscClick
         base.Start();
     }
 
-    public void OnEsc()
+    public override void OnEsc()
     {
         // gameObject.SetActive(false);
         UnityEngine.Debug.Log("ShouyeButtonUI OnEsc");

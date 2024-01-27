@@ -1,4 +1,4 @@
-public class SetButtonUI : ButtonGenerate, Y9g.IEscClick
+public class SetButtonUI : ButtonGenerate
 {
     protected override void Start()
     {
@@ -22,10 +22,5 @@ public class SetButtonUI : ButtonGenerate, Y9g.IEscClick
         };
 
         base.Start();
-    }
-
-    public void OnEsc()
-    {
-        gameObject.SetActive(false);
     }
 }

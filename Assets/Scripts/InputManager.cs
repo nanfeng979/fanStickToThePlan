@@ -42,14 +42,6 @@ public class InputManager : Singleton<InputManager>
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            // 获取当前焦点的 Button 对象。
-            // GameObject currentButtonGameObject = currentPage.GetUIGameobject();
-            // IButtonClick currentButtonClick = currentButtonGameObject.GetComponent<IButtonClick>();
-            // if (currentButtonClick != null)
-            // {
-            //     currentButtonClick.OnButtonClick();
-            // }
-
             // 获取当前 Page 对象。
             Page currentPage = PageManager.Instance.GetCurrenPage();
             if (currentPage != null)
