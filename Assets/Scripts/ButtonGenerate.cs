@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Y9g;
 
-public class ButtonGenerate : Page, IMove
+public class ButtonGenerate : Page
 {
     [SerializeField]
     protected GameObject UIGameobjectList;
@@ -103,13 +103,13 @@ public class ButtonGenerate : Page, IMove
     }
 
     // 重新打开页面。
-    protected void Init()
+    protected override void Init()
     {
         ChangeUIIndex(0);
     }
 
     // 移动输入。
-    public override void OnMove(Move4Direction moveDirection)
+    public override void OnMoveDown(Move4Direction moveDirection)
     {
         int direction = (int)moveDirection; // 得到移动方向的整数值。
         // 如果当前UI映射包含移动方向。
@@ -186,21 +186,6 @@ public class ButtonGenerate : Page, IMove
                     }
                     break;
             }
-        }
-    }
-
-    private void OnEnable() {
-        if (InputManager.Instance != null)
-        {
-            InputManager.Instance.AddNewPage(this);
-        }
-    }
-
-    private void OnDisable() {
-        if (InputManager.Instance != null)
-        {
-            InputManager.Instance.DeleteLastPage(this);
-            Init();
         }
     }
 }

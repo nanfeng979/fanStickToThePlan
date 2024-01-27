@@ -14,4 +14,9 @@ namespace Y9g
     {
         void OnMove(Move4Direction direction);
     }
+
+    public interface IMoveDown
+    {
+        void OnMoveDown(Move4Direction direction);
+    }
 }
