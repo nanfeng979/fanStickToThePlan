@@ -42,31 +42,38 @@ public class InputManager : Singleton<InputManager>
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            // 获取当前 Page 对象。
-            Page currentPage = PageManager.Instance.GetCurrenPage();
-            if (currentPage != null)
-            {
-                GameObject currentButtonGameObject = currentPage.GetCurrentObject();
-                IButtonClick currentButtonClickCommand = currentButtonGameObject.GetComponent<IButtonClick>();
-                if (currentButtonClickCommand != null)
-                {
-                    currentButtonClickCommand.OnButtonClick();
-                }
-            }
+            OnCommand<IButtonClick>();
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // 获取当前 Page 对象。
-            Page currentPage = PageManager.Instance.GetCurrenPage();
-            if (currentPage != null)
+            OnCommand<IEscClick>();
+        }
+    }
+
+    private void OnCommand<T>() where T : ICommand
+    {
+        // 获取当前 Page 对象。
+        Page currentPage = PageManager.Instance.GetCurrenPage();
+        if (currentPage != null)
+        {
+            ICommand currentCommand = currentPage.GetComponent<T>();
+            if (currentCommand != null)
             {
-                IEscClick currentEscCommand = currentPage.GetComponent<IEscClick>();
-                if (currentEscCommand != null)
-                {
-                    currentEscCommand.OnEsc();
-                }
+                currentCommand.Execute();
             }
+            else if (currentPage.GetCurrentObject() != null && currentPage.GetCurrentObject().GetComponent<T>() != null)
+            {
+                currentPage.GetCurrentObject().GetComponent<T>().Execute();
+            }
+            else
+            {
+                Debug.Log("currentCommand is null");
+            }
+        }
+        else
+        {
+            Debug.Log("currentPage is null");
         }
     }
 

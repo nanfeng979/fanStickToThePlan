@@ -189,7 +189,7 @@ public class ButtonGenerate : Page, IEscClick
         }
     }
 
-    public virtual void OnEsc()
+    public virtual void Execute()
     {
         gameObject.SetActive(false);
     }

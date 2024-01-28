@@ -1,21 +1,20 @@
 namespace Y9g
 {
-    public interface IButtonClick
+    public interface ICommand
     {
-        void OnButtonClick();
+        void Execute();
     }
 
-    public interface IEscClick
-    {
-        void OnEsc();
-    }
+    public interface IButtonClick : ICommand { }
+
+    public interface IEscClick : ICommand { }
 
     public interface IMove
     {
         void OnMove(Move4Direction direction);
     }
 
-    public interface IMoveDown
+    public interface IMoveDown 
     {
         void OnMoveDown(Move4Direction direction);
     }

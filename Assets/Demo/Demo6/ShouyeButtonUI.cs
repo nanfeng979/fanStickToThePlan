@@ -14,9 +14,8 @@ public class ShouyeButtonUI : ButtonGenerate
         base.Start();
     }
 
-    public override void OnEsc()
+    public override void Execute()
     {
-        // gameObject.SetActive(false);
-        UnityEngine.Debug.Log("ShouyeButtonUI OnEsc");
+        UnityEngine.Debug.Log("ShouyeButtonUI Execute");
     }
 }

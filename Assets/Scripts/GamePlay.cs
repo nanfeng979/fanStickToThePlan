@@ -18,7 +18,7 @@ public class GamePlay : Page, IEscClick
         return player;
     }
 
-    public void OnEsc()
+    public void Execute()
     {
         gamePlayUI.SetActive(true);
     }
