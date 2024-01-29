@@ -10,12 +10,12 @@ public class InputManager : Singleton<InputManager>
         OnKeyDownListenerEvent?.Invoke();
     }
 
-    public void AddKeyDownEvent(System.Action action)
+    public void RegisterKeyDownEvent(System.Action action)
     {
         OnKeyDownListenerEvent += action;
     }
 
-    public void SetKeyDownEvent(System.Action action)
+    public void ReSetKeyDownEvent(System.Action action)
     {
         OnKeyDownListenerEvent = action;
     }
