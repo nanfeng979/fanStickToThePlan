@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class ShouyeButtonUI : ButtonGenerate
 {
     protected override void Start()
@@ -11,11 +13,15 @@ public class ShouyeButtonUI : ButtonGenerate
             new int[]{0, 0, 0, UpRight, 0},
         };
 
+        // 注册事件。
+        AddCurrentPageAllAction(InputManager.Instance.OutOnMoveDown);
+        AddCurrentPageAllAction(InputManager.Instance.OutOnReturnDown);
+
         base.Start();
     }
 
     public override void Execute()
     {
-        UnityEngine.Debug.Log("ShouyeButtonUI Execute");
+        Debug.Log("ShouyeButtonUI Execute");
     }
 }

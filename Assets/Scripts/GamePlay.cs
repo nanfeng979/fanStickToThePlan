@@ -1,14 +1,20 @@
 using UnityEngine;
 using Y9g;
 
-public class GamePlay : Page, IEscClick
+public class GamePlay : Page, IMove, IEscClick
 {
     [SerializeField]
     private GameObject player;
     [SerializeField]
     private GameObject gamePlayUI;
 
-    public override void OnMove(Move4Direction direction)
+    void Start() {
+        // 注册事件。
+        AddCurrentPageAllAction(InOnMove);
+        AddCurrentPageAllAction(InputManager.Instance.OutOnEscDown);
+    }
+
+    public void OnMove(Move4Direction direction)
     {
         player.GetComponent<IMove>().OnMove(direction);
     }
@@ -21,5 +27,25 @@ public class GamePlay : Page, IEscClick
     public void Execute()
     {
         gamePlayUI.SetActive(true);
+    }
+
+    private void InOnMove()
+    {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        {
+            OnMove(Move4Direction.Up);
+        }
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
+            OnMove(Move4Direction.Down);
+        }
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            OnMove(Move4Direction.Left);
+        }
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            OnMove(Move4Direction.Right);
+        }
     }
 }

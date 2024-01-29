@@ -11,6 +11,11 @@ public class GamePlayUI : ButtonGenerate
             new int[]{0, 0, Up, 0},
         };
 
+        // 注册事件。
+        AddCurrentPageAllAction(InputManager.Instance.OutOnMoveDown);
+        AddCurrentPageAllAction(InputManager.Instance.OutOnReturnDown);
+        AddCurrentPageAllAction(InputManager.Instance.OutOnEscDown);
+
         base.Start();
     }
 }

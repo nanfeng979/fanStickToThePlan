@@ -21,6 +21,11 @@ public class SetButtonUI : ButtonGenerate
             new int[]{0, 0, 0, Left,  0, 0, Down, 0,  0, 0, 0, 0},
         };
 
+        // 注册事件。
+        AddCurrentPageAllAction(InputManager.Instance.OutOnMoveDown);
+        AddCurrentPageAllAction(InputManager.Instance.OutOnReturnDown);
+        AddCurrentPageAllAction(InputManager.Instance.OutOnEscDown);
+
         base.Start();
     }
 }

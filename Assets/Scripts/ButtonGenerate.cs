@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Y9g;
 
-public class ButtonGenerate : Page, IEscClick
+public class ButtonGenerate : Page, IMoveDown, IEscClick
 {
     [SerializeField]
     protected GameObject UIGameobjectList;
@@ -109,7 +109,7 @@ public class ButtonGenerate : Page, IEscClick
     }
 
     // 移动输入。
-    public override void OnMoveDown(Move4Direction moveDirection)
+    public void OnMoveDown(Move4Direction moveDirection)
     {
         int direction = (int)moveDirection; // 得到移动方向的整数值。
         // 如果当前UI映射包含移动方向。

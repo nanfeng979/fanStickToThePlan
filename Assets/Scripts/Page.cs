@@ -1,12 +1,19 @@
 using UnityEngine;
 
-public abstract class Page : MonoBehaviour, Y9g.IMove, Y9g.IMoveDown
+public abstract class Page : MonoBehaviour
 {
-    // public event System.Action<int> OnPlaySound;
+    private event System.Action currentPageAllAction;
+
     private void OnEnable() {
         if (InputManager.Instance != null)
         {
             InputManager.Instance.AddNewPage(this);
+
+            PreviousPageAllAction = InputManager.Instance.GetKeyDownEvent(); // 获取上一个页面的所有事件。
+            // 清空前一个页面的所有事件。
+            InputManager.Instance.ClearKeyDownEvent();
+            // 注册当前页面的所有事件。
+            InputManager.Instance.AddKeyDownEvent(CurrentPageAllAction);
         }
     }
 
@@ -15,6 +22,9 @@ public abstract class Page : MonoBehaviour, Y9g.IMove, Y9g.IMoveDown
         {
             InputManager.Instance.DeleteLastPage(this);
             Init();
+
+            // 恢复上一个页面的所有事件。
+            InputManager.Instance.SetKeyDownEvent(PreviousPageAllAction);
         }
     }
 
@@ -25,6 +35,10 @@ public abstract class Page : MonoBehaviour, Y9g.IMove, Y9g.IMoveDown
         return null;
     }
 
-    public virtual void OnMove(Y9g.Move4Direction direction) { }
-    public virtual void OnMoveDown(Y9g.Move4Direction direction) { }
+    private event System.Action PreviousPageAllAction;
+    public void CurrentPageAllAction() { currentPageAllAction?.Invoke(); }
+    protected void AddCurrentPageAllAction(System.Action action)
+    {
+        currentPageAllAction += action;
+    }
 }
