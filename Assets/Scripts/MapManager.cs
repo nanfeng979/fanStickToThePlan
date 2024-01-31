@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Y9g;
 
-public class MapManager : Singleton<MapManager>
+public class MapManager : Singleton_sub<MapManager>
 {
     #region 地图相关
     private int mapXCount;

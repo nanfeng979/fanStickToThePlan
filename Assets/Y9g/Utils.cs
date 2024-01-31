@@ -37,4 +37,14 @@ namespace Y9g
             }
         }
     }
+
+    public class Singleton_sub<T> : MonoBehaviour where T : Singleton_sub<T>
+    {
+        public static T Instance { get; private set; }
+
+        protected void Awake()
+        {
+            Instance = (T) this;
+        }
+    }
 }

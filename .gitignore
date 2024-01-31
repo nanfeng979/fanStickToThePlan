@@ -18,6 +18,10 @@
 /[Aa]ssets/Models/
 /[Aa]ssets/Models.meta
 
+# Test
+/[Aa]ssets/Test/
+/[Aa]ssets/Test.meta
+
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
 
