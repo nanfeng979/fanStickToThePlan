@@ -53,10 +53,10 @@ namespace Y9g
 
             if (nextIndex.x < 0 || nextIndex.x > array.Count || nextIndex.y <= 0 || nextIndex.y > array[0].Count)
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
     }
 

@@ -33,7 +33,7 @@ public abstract class MapGenerate2 : MonoBehaviour
         transform.parent.GetComponent<GamePlay>().ChangePlayer(player);
 
         // 同步数据。
-        player.GetComponent<Demo8_2_Player>().SetMapIndex(mapIndex);
+        player.GetComponent<Demo8_2_Player>().SetMapIndexList(mapIndex);
         player.GetComponent<Demo8_2_Player>().SetPlayerIndex(playerIndex);
     }
 
