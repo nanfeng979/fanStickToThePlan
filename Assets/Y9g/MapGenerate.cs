@@ -173,5 +173,31 @@ namespace Y9g
 
             return MapList;
         }
+
+        internal static GameObject GenerateVariousMap(List<List<int>> mapIndex, List<GameObject> mapBlock, float mapGapDistance)
+        {
+            // 地图方块的宽度和高度。
+            float mapBlockWidth = mapBlock[0].transform.localScale.x; // 表示地图方块的宽度。
+            float mapBlockHeight = mapBlock[0].transform.localScale.z; // 表示地图方块的高度。
+
+            GameObject MapList = new GameObject("MapList");
+
+            for (int i = 0; i < mapIndex.Count; i++)
+            {
+                for (int j = 0; j < mapIndex[i].Count; j++)
+                {
+                    // 计算每个方块在 x 或 z 轴方向上的位置，基于方块尺寸和间隔距离的乘积。
+                    float xPosition = j * (mapBlockWidth + mapGapDistance); // 表示 x 轴方向上的位置。
+                    float zPosition = i * (mapBlockHeight + mapGapDistance); // 表示 z 轴方向上的位置。
+
+                    Vector3 generatePosition = new Vector3(xPosition, 0, -zPosition); // 根据 x 和 z 轴方向上的位置，计算出生成位置。
+
+                    // 在计算出的位置生成地图方块。
+                    Object.Instantiate(mapBlock[mapIndex[i][j]], generatePosition, Quaternion.identity, MapList.transform);
+                }
+            }
+
+            return MapList;
+        }
     }
 }

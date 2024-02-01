@@ -10,7 +10,7 @@ public class GamePlay : Page, IMove, IEscClick
 
     void Start() {
         // 注册事件。
-        AddCurrentPageAllAction(InOnMove);
+        AddCurrentPageAllAction(InOnMoveDown);
         AddCurrentPageAllAction(InputManager.Instance.OutOnEscDown);
     }
 
@@ -27,6 +27,11 @@ public class GamePlay : Page, IMove, IEscClick
     public void Execute()
     {
         gamePlayUI.SetActive(true);
+    }
+
+    public void ChangePlayer(GameObject player)
+    {
+        this.player = player;
     }
 
     private void InOnMove()
@@ -46,6 +51,26 @@ public class GamePlay : Page, IMove, IEscClick
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             OnMove(Move4Direction.Right);
+        }
+    }
+
+    private void InOnMoveDown()
+    {
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            player.GetComponent<IMoveDown>().OnMoveDown(Move4Direction.Up);
+        }
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            player.GetComponent<IMoveDown>().OnMoveDown(Move4Direction.Down);
+        }
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            player.GetComponent<IMoveDown>().OnMoveDown(Move4Direction.Left);
+        }
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            player.GetComponent<IMoveDown>().OnMoveDown(Move4Direction.Right);
         }
     }
 }
