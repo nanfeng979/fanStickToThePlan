@@ -151,4 +151,12 @@ public class InputManager : Singleton<InputManager>
             OnCommand<IEscClick>();
         }
     }
+
+    public void OutOnSpaceDown()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            OnCommand<ISpace>();
+        }
+    }
 }

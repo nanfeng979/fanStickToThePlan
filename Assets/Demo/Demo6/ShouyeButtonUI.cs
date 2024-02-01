@@ -1,4 +1,5 @@
 using UnityEngine;
+using Y9g;
 
 public class ShouyeButtonUI : ButtonGenerate
 {
@@ -16,6 +17,7 @@ public class ShouyeButtonUI : ButtonGenerate
         // 注册事件。
         AddCurrentPageAllAction(InputManager.Instance.OutOnMoveDown);
         AddCurrentPageAllAction(InputManager.Instance.OutOnReturnDown);
+        AddCurrentPageAllAction(InputManager.Instance.OutOnSpaceDown);
 
         base.Start();
     }

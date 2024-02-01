@@ -9,6 +9,8 @@ namespace Y9g
 
     public interface IEscClick : ICommand { }
 
+    public interface ISpace : ICommand { }
+
     public interface IMove
     {
         void OnMove(Move4Direction direction);
