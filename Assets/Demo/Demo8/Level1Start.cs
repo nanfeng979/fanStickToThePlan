@@ -1,11 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Y9g;
 
-public class ShijiedituClick : MonoBehaviour, IButtonClick
+public class Level1Start : MonoBehaviour, Y9g.IButtonClick, Y9g.ISpace
 {
-    [SerializeField]
-    private string NextSceneName;
+    public string NextSceneName;
 
     public void Execute()
     {
