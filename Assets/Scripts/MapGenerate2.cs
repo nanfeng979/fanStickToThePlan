@@ -51,6 +51,6 @@ public abstract class MapGenerate2 : MonoBehaviour
             new List<int>() { 1, 0, 0, 0, 0, 0, 0, 0 }
         };
 
-        playerIndex = new Vector2Int(6, 0);
+        playerIndex = new Vector2Int(6, 1);
     }
 }

@@ -14,6 +14,6 @@ public class Demo8 : MapGenerate2
             new List<int>() { 1, 0, 0, 0, 0, 0, 0, 0 }
         };
 
-        playerIndex = new Vector2Int(6, 8);
+        playerIndex = new Vector2Int(6, 1);
     }
 }

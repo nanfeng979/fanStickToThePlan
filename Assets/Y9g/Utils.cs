@@ -51,13 +51,42 @@ namespace Y9g
                     break;
             }
 
-            if (nextIndex.x < 0 || nextIndex.x > array.Count || nextIndex.y <= 0 || nextIndex.y > array[0].Count)
+            if (nextIndex.x <= 0 || nextIndex.x > array.Count || nextIndex.y <= 0 || nextIndex.y > array[0].Count)
             {
                 return true;
             }
 
             return false;
         }
+
+        public static bool IsCrossObstacle(ref List<List<int>> array, Vector2Int currentIndex, int direction, List<int> obstacleList)
+        {
+            Vector2Int nextIndex = currentIndex;
+
+            switch (direction)
+            {
+                case 0:
+                    nextIndex.x--;
+                    break;
+                case 1:
+                    nextIndex.x++;
+                    break;
+                case 2:
+                    nextIndex.y--;
+                    break;
+                case 3:
+                    nextIndex.y++;
+                    break;
+            }
+
+            if (obstacleList.Contains(array[nextIndex.x - 1][nextIndex.y - 1]))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
     }
 
     public class Singleton<T> : MonoBehaviour where T : Singleton<T>

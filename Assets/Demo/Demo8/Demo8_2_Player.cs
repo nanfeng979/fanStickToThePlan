@@ -9,6 +9,7 @@ public class Demo8_2_Player : MonoBehaviour, IMoveDown
 {
     private List<List<int>> mapIndexList;
     private Vector2Int playerIndex;
+    private List<int> obstacleList = new List<int> { 0 };
 
     public void OnMoveDown(Move4Direction direction)
     {
@@ -17,33 +18,41 @@ public class Demo8_2_Player : MonoBehaviour, IMoveDown
             case Move4Direction.Up:
                 if (!Utils.IsCrossTheBorderBy2DArray(ref mapIndexList, playerIndex, (int)Move4Direction.Up - 1))
                 {
-                    Debug.Log("Up can move");
-                    ChangePlayerIndex(new Vector2Int(playerIndex.x - 1, playerIndex.y));
-                    ChangePlayerPosition();
+                    if (!Utils.IsCrossObstacle(ref mapIndexList, playerIndex, (int)Move4Direction.Up - 1, obstacleList))
+                    {
+                        ChangePlayerIndex(new Vector2Int(playerIndex.x - 1, playerIndex.y));
+                        ChangePlayerPosition();
+                    }
                 }
                 break;
             case Move4Direction.Down:
                 if (!Utils.IsCrossTheBorderBy2DArray(ref mapIndexList, playerIndex, (int)Move4Direction.Down - 1))
                 {
-                    Debug.Log("Down can move");
-                    ChangePlayerIndex(new Vector2Int(playerIndex.x + 1, playerIndex.y));
-                    ChangePlayerPosition();
+                    if (!Utils.IsCrossObstacle(ref mapIndexList, playerIndex, (int)Move4Direction.Down - 1, obstacleList))
+                    {
+                        ChangePlayerIndex(new Vector2Int(playerIndex.x + 1, playerIndex.y));
+                        ChangePlayerPosition();
+                    }
                 }
                 break;
             case Move4Direction.Left:
                 if (!Utils.IsCrossTheBorderBy2DArray(ref mapIndexList, playerIndex, (int)Move4Direction.Left - 1))
                 {
-                    Debug.Log("Left can move");
-                    ChangePlayerIndex(new Vector2Int(playerIndex.x, playerIndex.y - 1));
-                    ChangePlayerPosition();
+                    if (!Utils.IsCrossObstacle(ref mapIndexList, playerIndex, (int)Move4Direction.Left - 1, obstacleList))
+                    {
+                        ChangePlayerIndex(new Vector2Int(playerIndex.x, playerIndex.y - 1));
+                        ChangePlayerPosition();
+                    }
                 }
                 break;
             case Move4Direction.Right:
                 if (!Utils.IsCrossTheBorderBy2DArray(ref mapIndexList, playerIndex, (int)Move4Direction.Right - 1))
                 {
-                    Debug.Log("Right can move");
-                    ChangePlayerIndex(new Vector2Int(playerIndex.x, playerIndex.y + 1));
-                    ChangePlayerPosition();
+                    if (!Utils.IsCrossObstacle(ref mapIndexList, playerIndex, (int)Move4Direction.Right - 1, obstacleList))
+                    {
+                        ChangePlayerIndex(new Vector2Int(playerIndex.x, playerIndex.y + 1));
+                        ChangePlayerPosition();
+                    }
                 }
                 break;
         }
@@ -72,4 +81,5 @@ public class Demo8_2_Player : MonoBehaviour, IMoveDown
         transform.position = MapModel.Instance.GetPlayerPosition();
         transform.position = UsualCalculate.Vector3ChangeY(transform.position, 1.5f);
     }
+
 }

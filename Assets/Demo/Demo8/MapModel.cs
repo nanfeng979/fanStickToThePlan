@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Y9g;
 
-public class MapModel : Singleton<MapModel>
+public class MapModel : Singleton_sub<MapModel>
 {
     private List<List<int>> mapIndexList;
     private Vector2Int playerIndex;
