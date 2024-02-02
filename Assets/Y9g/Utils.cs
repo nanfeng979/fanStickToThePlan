@@ -59,7 +59,7 @@ namespace Y9g
             return false;
         }
 
-        public static bool IsCrossObstacle(ref List<List<int>> array, Vector2Int currentIndex, int direction, List<int> obstacleList)
+        public static bool IsCrossContainsList(ref List<List<int>> array, Vector2Int currentIndex, int direction, List<int> containsList)
         {
             Vector2Int nextIndex = currentIndex;
 
@@ -79,7 +79,7 @@ namespace Y9g
                     break;
             }
 
-            if (obstacleList.Contains(array[nextIndex.x - 1][nextIndex.y - 1]))
+            if (containsList.Contains(array[nextIndex.x - 1][nextIndex.y - 1]))
             {
                 return true;
             }

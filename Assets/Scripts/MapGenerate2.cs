@@ -8,6 +8,8 @@ public abstract class MapGenerate2 : MonoBehaviour
     protected List<List<int>> mapIndex;
     [SerializeField]
     private List<GameObject> mapBlocks;
+    protected List<List<int>> obstacleIndexList;
+    protected Vector2Int endIndex;
     #endregion 地图相关
 
     #region 玩家相关
@@ -36,6 +38,8 @@ public abstract class MapGenerate2 : MonoBehaviour
         // 同步数据。
         player.GetComponent<Demo8_2_Player>().SetMapIndexList(mapIndex);
         player.GetComponent<Demo8_2_Player>().SetPlayerIndex(playerIndex);
+        player.GetComponent<Demo8_2_Player>().SetObstacleIndexList(obstacleIndexList);
+        player.GetComponent<Demo8_2_Player>().SetEndIndex(endIndex);
         MapModel.Instance.SetMapIndexList(mapIndex);
         MapModel.Instance.SetPlayerIndex(playerIndex);
     }
