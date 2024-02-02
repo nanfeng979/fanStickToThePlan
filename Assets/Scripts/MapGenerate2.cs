@@ -56,5 +56,16 @@ public abstract class MapGenerate2 : MonoBehaviour
         };
 
         playerIndex = new Vector2Int(6, 1);
+
+        obstacleIndexList = new List<List<int>>() {
+            new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0 },
+            new List<int>() { 2, 0, 0, 0, 0, 0, 0, 0 },
+            new List<int>() { 0, 0, 2, 0, 0, 0, 0, 0 },
+            new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0 },
+            new List<int>() { 0, 0, 0, 0, 2, 0, 0, 0 },
+            new List<int>() { 2, 0, 0, 0, 0, 0, 0, 0 }
+        };
+
+        endIndex = new Vector2Int(6, 5);
     }
 }
