@@ -14,6 +14,8 @@ public abstract class Page : MonoBehaviour
             InputManager.Instance.ClearKeyDownEvent();
             // 注册当前页面的所有事件。
             InputManager.Instance.RegisterKeyDownEvent(CurrentPageAllAction);
+
+            Init();
         }
     }
 
@@ -21,7 +23,6 @@ public abstract class Page : MonoBehaviour
         if (InputManager.Instance != null)
         {
             InputManager.Instance.DeleteLastPage(this);
-            Init();
 
             // 恢复上一个页面的所有事件。
             InputManager.Instance.ReSetKeyDownEvent(PreviousPageAllAction);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Y9g;
 
-public class ButtonGenerate : Page, IMoveDown, IEscClick
+public abstract class ButtonGenerate : Page, IMoveDown, IEscClick
 {
     [SerializeField]
     protected GameObject UIGameobjectList;
@@ -36,7 +36,7 @@ public class ButtonGenerate : Page, IMoveDown, IEscClick
         }
 
         // 初始化UI颜色。
-        ChangeUIColor(currentUIIndex);
+        UIOnFocus(currentUIIndex);
     }
 
     // 选择UI。
@@ -46,24 +46,42 @@ public class ButtonGenerate : Page, IMoveDown, IEscClick
         PlaySound(0);
     }
 
+    // UI 获得焦点。
+    protected void UIOnFocus(int index)
+    {
+        ChangeUIColor(index);
+    }
+
     // 改变UI索引。
     protected void ChangeUIIndex(int index)
     {
         previousUIIndex = currentUIIndex; // 改变上一个UI索引。
         currentUIIndex = index; // 改变当前UI索引。
-        ChangeUIColor(index);
+        UIOnFocus(index);
     }
 
     // 改变UI颜色。
     protected void ChangeUIColor(int index)
     {
         // 改变上一个UI颜色。
-        GameObject previousUI = UIMapping[previousUIIndex];
-        previousUI.transform.GetComponent<UnityEngine.UI.Button>().image.color = Y9g.Utils.HexToColor("#FFFFFF");
+        if (previousUIIndex >= 0 && previousUIIndex < UIMapping.Count)
+        {
+            GameObject previousUI = UIMapping[previousUIIndex];
+            if (previousUI != null)
+            {
+                previousUI.transform.GetComponent<UnityEngine.UI.Button>().image.color = Y9g.Utils.HexToColor("#FFFFFF");
+            }
+        }
 
         // 改变当前UI颜色。
-        GameObject currentUI = UIMapping[index];
-        currentUI.transform.GetComponent<UnityEngine.UI.Button>().image.color = Y9g.Utils.HexToColor("#" + buttonColor);
+        if (index >= 0 && index < UIMapping.Count)
+        {
+            GameObject currentUI = UIMapping[index];
+            if (currentUI != null)
+            {
+                currentUI.transform.GetComponent<UnityEngine.UI.Button>().image.color = Y9g.Utils.HexToColor("#" + buttonColor);
+            }
+        }
     }
 
     // 播放音效。
