@@ -1,5 +1,4 @@
 using UnityEngine;
-using Y9g;
 
 public class ShouyeButtonUI : ButtonGenerate
 {

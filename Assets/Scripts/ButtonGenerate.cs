@@ -32,7 +32,10 @@ public abstract class ButtonGenerate : Page, IMoveDown, IEscClick
         // 初始化UI映射。
         for (int i = 0; i < UIGameobjectList.transform.childCount; i++)
         {
-            UIMapping.Add(UIGameobjectList.transform.GetChild(i).gameObject);
+            if (UIGameobjectList.transform.GetChild(i).gameObject.tag == "UIButton")
+            {
+                UIMapping.Add(UIGameobjectList.transform.GetChild(i).gameObject);
+            }
         }
 
         // 初始化UI颜色。

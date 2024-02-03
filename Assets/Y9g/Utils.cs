@@ -87,6 +87,16 @@ namespace Y9g
             return false;
         }
 
+        /// <summary>
+        /// 将百分比字符串转换为浮点数
+        /// </summary>
+        /// <param name="percent"></param>
+        /// <returns></returns>
+        public static float PercentToFloat(string percent)
+        {
+            return float.Parse(percent.Replace("%", "")) / 100;
+        }
+
     }
 
     public class Singleton<T> : MonoBehaviour where T : Singleton<T>
