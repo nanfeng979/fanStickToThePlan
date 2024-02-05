@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Y9g;
 using Newtonsoft.Json;
-using UnityEngine;
 
 public class LanguageManager : Singleton<LanguageManager>
 {
@@ -85,6 +84,21 @@ public class LanguageManager : Singleton<LanguageManager>
     {
         currentLanguageType = (LanguageType)(((int)currentLanguageType + next + LanguageType.GetValues(typeof(LanguageType)).Length) % LanguageType.GetValues(typeof(LanguageType)).Length);
         SetLanguageType(currentLanguageType);
+    }
+
+    public string GetLanguageTypeName()
+    {
+        switch (currentLanguageType)
+        {
+            case LanguageType.zh:
+                return "中文";
+            case LanguageType.en:
+                return "英文";
+            case LanguageType.jp:
+                return "日文";
+            default:
+                return "未知";
+        }
     }
 }
 
