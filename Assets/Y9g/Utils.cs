@@ -99,7 +99,7 @@ namespace Y9g
 
     }
 
-    public class Singleton<T> : MonoBehaviour where T : Singleton<T>
+    public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
         public static T Instance { get; private set; }
 
@@ -118,7 +118,7 @@ namespace Y9g
         }
     }
 
-    public class Singleton_sub<T> : MonoBehaviour where T : Singleton_sub<T>
+    public abstract class Singleton_sub<T> : MonoBehaviour where T : Singleton_sub<T>
     {
         public static T Instance { get; private set; }
 
@@ -126,5 +126,66 @@ namespace Y9g
         {
             Instance = (T) this;
         }
+    }
+
+    /// <summary>
+    /// 单例观察者。
+    /// </summary>
+    /// <typeparam name="T"> 单例类型 </typeparam>
+    public abstract class SingletonObserver<T> : Singleton<T>, ISubject where T : SingletonObserver<T>
+    {
+        /// <summary>
+        /// 观察者列表。
+        /// </summary>
+        private List<IObserver> observers = new List<IObserver>();
+
+        /// <summary>
+        /// 注册观察者。
+        /// </summary>
+        /// <param name="observer"> 观察者 </param>
+        public void RegisterObserver(IObserver observer)
+        {
+            observers.Add(observer);
+        }
+
+        /// <summary>
+        /// 注销观察者。
+        /// </summary>
+        /// <param name="observer"> 观察者 </param>
+        public void UnregisterObserver(IObserver observer)
+        {
+            observers.Remove(observer);
+        }
+
+        /// <summary>
+        /// 通知观察者。
+        /// </summary>
+        public void NotifyObservers()
+        {
+            foreach (var observer in observers)
+            {
+                observer.UpdateObserver();
+            }
+        }
+    }
+
+    /// <summary>
+    /// 主题接口。
+    /// </summary>
+    public interface ISubject
+    {
+        void RegisterObserver(IObserver observer);
+
+        void UnregisterObserver(IObserver observer);
+
+        void NotifyObservers();
+    }
+
+    /// <summary>
+    /// 观察者接口。
+    /// </summary>
+    public interface IObserver
+    {
+        void UpdateObserver();
     }
 }

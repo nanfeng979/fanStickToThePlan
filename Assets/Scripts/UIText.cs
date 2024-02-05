@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Y9g;
 
 [RequireComponent(typeof(Text))]
-public class UIText : MonoBehaviour
+public class UIText : MonoBehaviour, IObserver
 {
     public string key;
     private Text text;
@@ -15,7 +16,7 @@ public class UIText : MonoBehaviour
         LanguageManager.Instance.RegisterObserver(this);
     }
 
-    public void OnLanguageChanged()
+    public void UpdateObserver()
     {
         text.text = LanguageManager.Instance.GetText(key);
     }

@@ -2,16 +2,13 @@ using System.Collections.Generic;
 using Y9g;
 using Newtonsoft.Json;
 
-public class LanguageManager : Singleton<LanguageManager>
+public class LanguageManager : SingletonObserver<LanguageManager>
 {
     // 语言文本字典。
     private Dictionary<string, string> languageDict = new Dictionary<string, string>();
 
     // 当前语言类型。
     private LanguageType currentLanguageType = LanguageType.zh;
-
-    // 观察者列表。
-    private List<UIText> observers = new List<UIText>();
 
     private void Start() {
         SetLanguageType(LanguageType.zh);
@@ -39,6 +36,11 @@ public class LanguageManager : Singleton<LanguageManager>
         LoadLanguageType(languageType);
     }
 
+    /// <summary>
+    /// 获取对应的文本。
+    /// </summary>
+    /// <param name="key"> 键值 </param>
+    /// <returns> 文本 </returns>
     public string GetText(string key)
     {
         if (languageDict.ContainsKey(key))
@@ -49,43 +51,19 @@ public class LanguageManager : Singleton<LanguageManager>
     }
 
     /// <summary>
-    /// 通知观察者。
+    /// 根据下一个步数，切换语言。
     /// </summary>
-    private void NotifyObservers()
+    /// <param name="nextStep"></param>
+    public void NextLanguage(int nextStep)
     {
-        foreach (var observer in observers)
-        {
-            observer.OnLanguageChanged();
-        }
-    }
-
-    /// <summary>
-    /// 注册观察者。
-    /// </summary>
-    /// <param name="observer"> 观察者 </param>
-    public void RegisterObserver(UIText observer)
-    {
-        if (!observers.Contains(observer))
-        {
-            observers.Add(observer);
-        }
-    }
-
-    /// <summary>
-    /// 取消注册观察者。
-    /// </summary>
-    /// <param name="observer"> 观察者 </param>
-    public void UnregisterObserver(UIText observer)
-    {
-        observers.Remove(observer);
-    }
-
-    public void NextLanguage(int next)
-    {
-        currentLanguageType = (LanguageType)(((int)currentLanguageType + next + LanguageType.GetValues(typeof(LanguageType)).Length) % LanguageType.GetValues(typeof(LanguageType)).Length);
+        currentLanguageType = (LanguageType)(((int)currentLanguageType + nextStep + LanguageType.GetValues(typeof(LanguageType)).Length) % LanguageType.GetValues(typeof(LanguageType)).Length);
         SetLanguageType(currentLanguageType);
     }
 
+    /// <summary>
+    /// 获取当前语言类型名称。
+    /// </summary>
+    /// <returns> 语言类型名称 </returns>
     public string GetLanguageTypeName()
     {
         switch (currentLanguageType)
