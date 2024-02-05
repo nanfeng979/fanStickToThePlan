@@ -8,6 +8,9 @@ public class LanguageManager : Singleton<LanguageManager>
     // 语言文本字典。
     private Dictionary<string, string> languageDict = new Dictionary<string, string>();
 
+    // 当前语言类型。
+    private LanguageType currentLanguageType = LanguageType.zh;
+
     // 观察者列表。
     private List<UIText> observers = new List<UIText>();
 
@@ -31,8 +34,9 @@ public class LanguageManager : Singleton<LanguageManager>
     /// 改变语言类型。
     /// </summary>
     /// <param name="languageType"> 语言类型 </param>
-    public void SetLanguageType(LanguageType languageType)
+    private void SetLanguageType(LanguageType languageType)
     {
+        currentLanguageType = languageType;
         LoadLanguageType(languageType);
     }
 
@@ -76,10 +80,17 @@ public class LanguageManager : Singleton<LanguageManager>
     {
         observers.Remove(observer);
     }
+
+    public void NextLanguage(int next)
+    {
+        currentLanguageType = (LanguageType)(((int)currentLanguageType + next + LanguageType.GetValues(typeof(LanguageType)).Length) % LanguageType.GetValues(typeof(LanguageType)).Length);
+        SetLanguageType(currentLanguageType);
+    }
 }
 
 public enum LanguageType
 {
     zh,
     en,
+    jp,
 }

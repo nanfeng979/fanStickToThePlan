@@ -3,5 +3,9 @@
     "设置":"Setting",
     "退出":"Quit",
     "Discord":"Discord",
-    "Twitter":"Twitter"
+    "Twitter":"Twitter",
+    "音乐-": "Music-",
+    "音乐+": "Music+",
+    "音效-": "Sound-",
+    "音效+": "Sound+"
 }

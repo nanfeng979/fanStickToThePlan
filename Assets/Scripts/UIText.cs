@@ -19,4 +19,9 @@ public class UIText : MonoBehaviour
     {
         text.text = LanguageManager.Instance.GetText(key);
     }
+
+    private void OnDestroy()
+    {
+        LanguageManager.Instance.UnregisterObserver(this);
+    }
 }
