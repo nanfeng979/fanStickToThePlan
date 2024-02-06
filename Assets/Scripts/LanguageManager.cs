@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Y9g;
-using Newtonsoft.Json;
 
 public class LanguageManager : SingletonObserver<LanguageManager>
 {
@@ -10,18 +9,13 @@ public class LanguageManager : SingletonObserver<LanguageManager>
     // 当前语言类型。
     private LanguageType currentLanguageType = LanguageType.zh;
 
-    private void Start() {
-        SetLanguageType(LanguageType.zh);
-    }
-
     /// <summary>
     /// 加载指定的语言文本。
     /// </summary>
     /// <param name="languageType"> 语言类型 </param>
     private void LoadLanguageType(LanguageType languageType)
     {
-        string jsonText = SystemIO.ReadJsonFromStreamingAssets("Language_" + languageType.ToString());
-        languageDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonText);
+        languageDict = SystemIO.ReadJsonFromStreamingAssets<Dictionary<string, string>>("Language_" + languageType.ToString());
         // 通知观察者。
         NotifyObservers();
     }
@@ -30,10 +24,21 @@ public class LanguageManager : SingletonObserver<LanguageManager>
     /// 改变语言类型。
     /// </summary>
     /// <param name="languageType"> 语言类型 </param>
-    private void SetLanguageType(LanguageType languageType)
+    public void SetLanguageType(LanguageType languageType)
     {
         currentLanguageType = languageType;
         LoadLanguageType(languageType);
+    }
+
+    /// <summary>
+    /// 保存语言类型。
+    /// </summary>
+    public void SaveLanguageType()
+    {
+        // 更改游戏设置。
+        GameSettingManager.Instance.SetGameSetting("语言类型", currentLanguageType.ToString());
+        // 保存游戏设置。
+        GameSettingManager.Instance.SaveGameSetting();
     }
 
     /// <summary>
@@ -56,8 +61,9 @@ public class LanguageManager : SingletonObserver<LanguageManager>
     /// <param name="nextStep"></param>
     public void NextLanguage(int nextStep)
     {
-        currentLanguageType = (LanguageType)(((int)currentLanguageType + nextStep + LanguageType.GetValues(typeof(LanguageType)).Length) % LanguageType.GetValues(typeof(LanguageType)).Length);
+        currentLanguageType = EnumCalculate.GetOtherEnum(currentLanguageType, nextStep);
         SetLanguageType(currentLanguageType);
+        SaveLanguageType();
     }
 
     /// <summary>

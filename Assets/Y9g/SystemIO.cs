@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Y9g
@@ -19,7 +20,8 @@ namespace Y9g
             string json = ReadFileFromStreamingAssets(fileName + ".json");
             if (!string.IsNullOrEmpty(json))
             {
-                result = ReadJson<T>(json);
+                result = JsonConvert.DeserializeObject<T>(json);
+                // result = ReadJson<T>(json);
             }
 
             return result;
@@ -53,11 +55,17 @@ namespace Y9g
             return result;
         }
 
-        public static T ReadJson<T>(string jsonString)
-        {
-            T jsonData = JsonUtility.FromJson<T>(jsonString);
-            return jsonData;
-        }
+        /// <summary>
+        /// 系统自带的Json解析。
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="jsonString"></param>
+        /// <returns></returns>
+        // public static T ReadJson<T>(string jsonString)
+        // {
+        //     T jsonData = JsonUtility.FromJson<T>(jsonString);
+        //     return jsonData;
+        // }
 
         public static T ReadJsonWithSystemSelf<T>(string jsonString)
         {
@@ -70,6 +78,13 @@ namespace Y9g
         {
             public T data;
         }
+
+        public static void WriteJsonToStreamingAssets(string fileName, string jsonString)
+        {
+            string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, fileName + ".json");
+            System.IO.File.WriteAllText(filePath, jsonString);
+        }
+
         #endregion Json
     }
 }

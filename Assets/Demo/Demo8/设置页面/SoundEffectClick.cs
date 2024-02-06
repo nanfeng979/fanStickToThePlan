@@ -23,5 +23,10 @@ public class SoundEffectClick : MonoBehaviour, Y9g.IButtonClick
         }
 
         soundEffectTextValue.text = currentVolume + "%";
+
+        SoundManager.Instance.SetSoundValue(Y9g.Utils.PercentToFloat(soundEffectTextValue.text));
+
+        GameSettingManager.Instance.SetGameSetting("音效值", soundEffectTextValue.text);
+        GameSettingManager.Instance.SaveGameSetting();
     }
 }

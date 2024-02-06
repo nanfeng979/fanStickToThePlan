@@ -10,4 +10,14 @@ public class MusicManager : Singleton<MusicManager>
         audioSource = GetComponent<AudioSource>();
         audioSource.Play();
     }
+
+    public string GetMusicValue()
+    {
+        return audioSource.volume * 100 + "%";
+    }
+
+    public void SetMusicValue(float value)
+    {
+        audioSource.volume = value;
+    }
 }

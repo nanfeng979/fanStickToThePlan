@@ -23,4 +23,14 @@ public class SoundManager : Singleton<SoundManager>
             }
         }
     }
+
+    public string GetSoundValue()
+    {
+        return audioSource.volume * 100 + "%";
+    }
+
+    public void SetSoundValue(float value)
+    {
+        audioSource.volume = value;
+    }
 }

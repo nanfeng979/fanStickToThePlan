@@ -23,5 +23,10 @@ public class MusicClick : MonoBehaviour, Y9g.IButtonClick
         }
 
         musicTextValue.text = currentVolume + "%";
+
+        MusicManager.Instance.SetMusicValue(Y9g.Utils.PercentToFloat(musicTextValue.text));
+
+        GameSettingManager.Instance.SetGameSetting("音乐值", musicTextValue.text);
+        GameSettingManager.Instance.SaveGameSetting();
     }
 }

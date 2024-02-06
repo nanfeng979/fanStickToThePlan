@@ -1,10 +1,7 @@
-using UnityEngine;
-
-public class GetLanguageType : MonoBehaviour
+public class GetLanguageType : GetUITextValue
 {
-    void Start()
+    protected override void SetTextValue()
     {
-        UnityEngine.UI.Text languageText = GetComponent<UnityEngine.UI.Text>();
-        languageText.text = LanguageManager.Instance.GetLanguageTypeName();
+        text.text = LanguageManager.Instance.GetLanguageTypeName();
     }
 }
