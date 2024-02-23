@@ -113,7 +113,7 @@ namespace Y9g
             else
             {
                 Debug.LogWarning("单例模式，已经存在一个实例。");
-                // Destroy(gameObject);
+                Destroy(gameObject);
             }
         }
     }
